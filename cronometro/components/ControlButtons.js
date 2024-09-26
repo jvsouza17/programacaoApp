@@ -1,14 +1,16 @@
 import React from 'react';
 import { View, Button, StyleSheet } from 'react-native';
 
-const ControlButtons = ({ isRunning, onStartPause, onReset }) => {
+const ControlButtons = ({ isRunning, onStartPause, onReset, time }) => {
   return (
     <View style={styles.buttonContainer}>
       <Button
         title={isRunning ? 'Pausar' : 'Iniciar'}
         onPress={onStartPause}
       />
-      <Button title="Reiniciar" onPress={onReset} />
+      {time > 0 && (
+        <Button title="Reiniciar" onPress={onReset} />
+      )}
     </View>
   );
 };
