@@ -39,7 +39,7 @@ export default function App() {
         isRunning={isRunning}
         onStartPause={startPauseHandler}
         onReset={resetHandler}
-        time={time} // Passa o tempo como prop
+        time={time}
       />
     </View>
   );
