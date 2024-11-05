@@ -5,10 +5,9 @@ export default function App() {
   const [peso, setPeso] = useState('');
   const [altura, setAltura] = useState('');
   const [resultado, setResultado] = useState('');
-  const [imagem, setImagem] = useState('');  // Estado para controlar a imagem exibida
-  const [calculoRealizado, setCalculoRealizado] = useState(false);  // Estado para controlar se o cálculo foi realizado
+  const [imagem, setImagem] = useState('');  
+  const [calculoRealizado, setCalculoRealizado] = useState(false);  
 
-  // Função para calcular o IMC e selecionar a imagem correta
   const calcularIMC = () => {
     const pesoNum = parseFloat(peso);
     const alturaNum = parseFloat(altura);
@@ -25,40 +24,38 @@ export default function App() {
 
     if (imc < 18.5) {
       classificacao = 'Abaixo do peso';
-      imagemClassificacao = require('./assets/abaixoPeso.png'); // Imagem para "Abaixo do peso"
+      imagemClassificacao = require('./assets/abaixoPeso.png');
     } else if (imc >= 18.5 && imc < 24.9) {
       classificacao = 'Peso normal';
-      imagemClassificacao = require('./assets/saudavel.png'); // Imagem para "Peso normal"
+      imagemClassificacao = require('./assets/saudavel.png');
     } else if (imc >= 25 && imc < 29.9) {
       classificacao = 'Sobrepeso';
-      imagemClassificacao = require('./assets/acimaPeso.png'); // Imagem para "Sobrepeso"
+      imagemClassificacao = require('./assets/acimaPeso.png');
     } else if (imc >= 30 && imc < 39.9) {
       classificacao = 'Obesidade';
-      imagemClassificacao = require('./assets/obesidade.png'); // Imagem para "Obesidade"
+      imagemClassificacao = require('./assets/obesidade.png');
     } else {
       classificacao = 'Obesidade grave';
-      imagemClassificacao = require('./assets/obesidadeGrave.png'); // Imagem para "Obesidade grave"
+      imagemClassificacao = require('./assets/obesidadeGrave.png');
     }
 
     setResultado(`Seu IMC é ${imc.toFixed(2)}. Classificação: ${classificacao}`);
-    setImagem(imagemClassificacao); // Define a imagem baseada na classificação
-    setCalculoRealizado(true);  // Marca como cálculo realizado
+    setImagem(imagemClassificacao);
+    setCalculoRealizado(true);  
   };
 
-  // Função para resetar o formulário
   const resetarFormulario = () => {
     setPeso('');
     setAltura('');
     setResultado('');
     setImagem('');
-    setCalculoRealizado(false);  // Reseta o estado para permitir novo cálculo
+    setCalculoRealizado(false);  
   };
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Calculadora de IMC</Text>
       
-      {/* Imagem correspondente à classificação */}
       {imagem && (
         <Image
           source={imagem}
@@ -66,7 +63,6 @@ export default function App() {
         />
       )}
 
-      {/* Entrada de peso */}
       {!calculoRealizado && (
         <>
           <TextInput
@@ -77,7 +73,6 @@ export default function App() {
             onChangeText={setPeso}
           />
 
-          {/* Entrada de altura */}
           <TextInput
             style={styles.input}
             placeholder="Digite sua altura (m)"
@@ -88,14 +83,12 @@ export default function App() {
         </>
       )}
 
-      {/* Botão para calcular */}
       {!calculoRealizado ? (
-        <Button title="Calcular IMC" onPress={calcularIMC} />
+        <Button title="Calcular IMC" onPress={calcularIMC} color="red" />
       ) : (
-        <Button title="Recalcular IMC" onPress={resetarFormulario} />
+        <Button title="Recalcular IMC" onPress={resetarFormulario} color="red" />
       )}
 
-      {/* Resultado */}
       {resultado ? <Text style={styles.result}>{resultado}</Text> : null}
     </View>
   );
@@ -108,30 +101,34 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 16,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#e8f4f8', // Cor de fundo clara e moderna
   },
   title: {
-    fontSize: 24,
+    fontSize: 26,
     fontWeight: 'bold',
+    color: 'green', // Cor moderna para o título
     marginBottom: 16,
   },
   input: {
-    height: 40,
-    borderColor: '#ccc',
-    borderWidth: 1,
-    marginBottom: 12,
-    paddingLeft: 8,
+    height: 48,
+    borderColor: 'gray',
+    borderWidth: 2,
+    marginBottom: 16,
+    paddingLeft: 10,
     width: '80%',
-    borderRadius: 5,
+    borderRadius: 10,
+    backgroundColor: '#fff',
   },
   result: {
     marginTop: 16,
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: 'bold',
+    color: '#333', // Cor do texto mais neutra e moderna
+    textAlign: 'center',
   },
   resultImage: {
-    width: 150,
-    height: 300,
+    width: 130,
+    height: 280,
     marginBottom: 20,
   },
 });
